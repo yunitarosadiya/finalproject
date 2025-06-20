@@ -1,10 +1,10 @@
+import { useColorScheme } from '@/hooks/useColorScheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState, useRef } from 'react';
-import { View, StyleSheet, Animated, Dimensions, Image} from 'react-native';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useEffect, useRef, useState } from 'react';
+import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,14 +24,14 @@ export default function RootLayout() {
             await SplashScreen.hideAsync();
             setAppReady(true);
         }, 3000);
-    }, []);
+    }, [] );
 
     if (!appReady) {
         return (
-            <View style={StyleSheet.splashContainer}>
+            <View style={styles.splashContainer}>
                 <Animated.Image
                     source={require('../assets/images/logo.png')}
-                    style={[StyleSheet.logo, { opacity: fadeAnim }]}
+                    style={[styles.logo, { opacity: fadeAnim }]}
                     resizeMode="contain"
                 />
             </View>

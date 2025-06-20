@@ -12,7 +12,7 @@ export default function Index() {
             try {
                 const response = await fetch('https://open-api.my.id/api/doa');
                 const json = await response.json();
-                console.log('DATA APIA:', json);
+                console.log('DATA API:', json);
                 
                 if (json && json.length > 0) {
                     const randomIndex = Math.floor(Math.random() * json.length);
@@ -36,34 +36,34 @@ export default function Index() {
     }
 
     return (
-        <ScrollView contentContainerStyle={StyleSheet.container}>
-            <Text style={StyleSheet.header}>Hafalkan Doa Ini</Text>
+        <ScrollView contentContainerStyle={styles.container}>
+            <Text style={styles.header}>Hafalkan Doa Ini</Text>
 
             {doa ? (
-                <View style={StyleSheet.card}>
-                    <Text style={StyleSheet.label}>Judul : </Text>
-                    <Text style={StyleSheet.value}>{doa.judul}</Text>
+                <View style={styles.card}>
+                    <Text style={styles.label}>Judul : </Text>
+                    <Text style={styles.value}>{doa.judul}</Text>
 
-                    <Text style={StyleSheet.label}>Arab : </Text>
-                    <Text style={StyleSheet.value}>{doa.arab}</Text>
+                    <Text style={styles.label}>Arab : </Text>
+                    <Text style={styles.value}>{doa.arab}</Text>
 
-                    <Text style={StyleSheet.label}>Latin : </Text>
-                    <Text style={StyleSheet.value}>{doa.latin}</Text>
+                    <Text style={styles.label}>Latin : </Text>
+                    <Text style={styles.value}>{doa.latin}</Text>
 
-                    <Text style={StyleSheet.label}>Terjemah : </Text>
-                    <Text style={StyleSheet.value}>{doa.terjemah}</Text>
+                    <Text style={styles.label}>Terjemah : </Text>
+                    <Text style={styles.value}>{doa.terjemah}</Text>
                 </View>
             )   : (
                 <Text style={{ color: 'red', marginTop: 20 }}>Data tidak ditemukan</Text>
             )}
 
-            <View style={StyleSheet.buttonContainer}>
-                <TouchableOpacity style={StyleSheet.buttonDoa} onPress={() => router.push('/semuadoa')}>
-                    <Text style={StyleSheet.buttonText}>SEMUA DOA</Text>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.buttonDoa} onPress={() => router.push('/semuadoa')}>
+                    <Text style={styles.buttonText}>SEMUA DOA</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={StyleSheet.buttonMotivasi} onPress={() => router.push('/motivasi')}>
-                    <Text style={StyleSheet.buttonText}>MOTIVASI</Text>
+                <TouchableOpacity style={styles.buttonMotivasi} onPress={() => router.push('/motivasi')}>
+                    <Text style={styles.buttonText}>MOTIVASI</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         width: '100%',
         gap: 15,
-        marginBotttom: 30,
+        marginBottom: 30,
     },
 
     buttonDoa: {
