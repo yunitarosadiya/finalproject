@@ -1,9 +1,10 @@
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from "react";
-import { Alert, Image, ScrollView, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function SemuaDoa() {
     const [doaList, setDoaList] = useState([]);
+    const [ showModal, setShowModal ] = useState(false) ;
     const router = useRouter();
 
     useEffect(() => {
@@ -19,28 +20,40 @@ export default function SemuaDoa() {
         fetchDoa();
     }, []);
 
-    return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.headerContainer}>
-                <Image source={require('../assets/images/bulubuku.png')} style={styles.headerImage} />
-                <Text style={styles.headerText}>Daftar Doa Harian</Text>
-            </View>
 
-            <View style={styles.listContainer}>
-                {doaList.map((doa) => (
-                    <TouchableOpacity
-                    key={doa.id}
-                    style={styles.doaCard}
-                    onPress={() => router.push(`/semua-doa/${doa.id}`)} >
-                        <Text style={styles.doaText}>{doa.judul.toLowerCase()}</Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
+    return (
+        <View style={{ flex: 1, backgroundColor: '#843c3c' }}>
+            <ScrollView contentContainerStyle={styles.container}>
+                <View style={styles.headerContainer}>
+                    <Image source={require('../assets/images/bulubuku.png')} style={styles.headerImage} />
+                    <Text style={styles.headerText}>Daftar Doa Harian</Text>
+                </View>
+
+                <View style={styles.listContainer}>
+                    {doaList.map((doa) => (
+                        <TouchableOpacity
+                            key={doa.id}
+                            style={styles.doaCard}
+                            onPress={() => router.push(`/detaildoa/${doa.id}`)}>
+                            <Text style={styles.doaText}>{doa.judul.toLowerCase()}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
+            </ScrollView>
+
+            <Modal transparent={true} visible={showModal} animationType="fade">
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.modalText}>Semangat terus sayang 😘✨</Text>
+                        <TouchableOpacity onPress={() => setShowModal(false)} style={styles.closeButton}>
+                            <Text style={styles.closeButtonText}>Tutup</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
 
             <View style={styles.bottomContainer}>
-                <TouchableOpacity
-                    style={styles.notesButton}
-                    onPress={() => Alert.alert('Semangat!', 'Semangat terus sayang 😘✨')}>
+                <TouchableOpacity style={styles.notesButton} onPress={() => setShowModal(true)}>
                     <Text style={styles.buttonText}>Notes</Text>
                 </TouchableOpacity>
 
@@ -48,8 +61,8 @@ export default function SemuaDoa() {
                     <Text style={styles.buttonHomeIcon}>🏠</Text>
                 </TouchableOpacity>
             </View>
-        </ScrollView>
-    )
+        </View>
+        );
 }
 
 const styles = StyleSheet.create({
@@ -105,6 +118,8 @@ const styles = StyleSheet.create({
         marginTop: 30,
         justifyContent: 'space-between',
         width: '100%',
+        paddingHorizontal: 20,
+        paddingBottom: 20,
     },
 
     notesButton: {
@@ -115,8 +130,10 @@ const styles = StyleSheet.create({
     },
 
     homeButton: {
-        backgroundColor: 'transparent',
+        backgroundColor: '#5e2e2e',
         paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -127,7 +144,40 @@ const styles = StyleSheet.create({
     },
 
     buttonHomeIcon: {
-        fontSize: 30,
+        fontSize: 24,
         color: '#fff',
+    },
+
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    modalContainer: {
+        backgroundColor: '#fff',
+        padding: 30,
+        borderRadius: 20,
+        alignItems: 'center',
+    },
+
+    modalText: {
+        fontSize: 18,
+        color: '#843c3c',
+        textAlign: 'center',
+        marginBottom: 20,
+    },
+
+    closeButton: {
+        backgroundColor: '#5e2e2e',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 10,
+    },
+
+    closeButtonText: {
+        color: '#fff',
+        fontSize: 16,
     },
 });
