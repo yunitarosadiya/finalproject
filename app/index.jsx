@@ -65,6 +65,10 @@ export default function Index() {
                 <TouchableOpacity style={styles.buttonMotivasi} onPress={() => router.push('/motivasi')}>
                     <Text style={styles.buttonText}>MOTIVASI</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style={styles.buttonFavorit} onPress={() => router.push('/favoritdoa')}>
+                    <Text style={styles.buttonText}>LIHAT DOA FAVORIT</Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     );
@@ -136,5 +140,12 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 16,
+    },
+
+    buttonFavorit: {
+        backgroundColor: '#5e2e2e',
+        paddingVertical: 15,
+        borderRadius: 20,
+        alignItems: 'center',
     },
 });
