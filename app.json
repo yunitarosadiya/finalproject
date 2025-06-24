@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.yunitadev.finalproject"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,13 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "assetBundlePatterns": ["**/**"],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "2572fd73-a42e-43ad-9d99-be6d0822792c"
+      }
     }
   }
 }
